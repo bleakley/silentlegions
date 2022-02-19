@@ -27,7 +27,7 @@ Hooks.once("init", async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "1d8",
+    formula: "1d8 + @attributes.initiative",
     decimals: 2
   };
 
@@ -59,34 +59,34 @@ Hooks.once("init", async function() {
     config: true
   });
 
-  // Register initiative setting.
-  game.settings.register("silentlegions", "initFormula", {
-    name: "SETTINGS.SimpleInitFormulaN",
-    hint: "SETTINGS.SimpleInitFormulaL",
-    scope: "world",
-    type: String,
-    default: "1d8",
-    config: true,
-    onChange: formula => _simpleUpdateInit(formula, true)
-  });
+  // // Register initiative setting.
+  // game.settings.register("silentlegions", "initFormula", {
+  //   name: "SETTINGS.SimpleInitFormulaN",
+  //   hint: "SETTINGS.SimpleInitFormulaL",
+  //   scope: "world",
+  //   type: String,
+  //   default: "1d8 + @attributes.initiative",
+  //   config: true,
+  //   onChange: formula => _simpleUpdateInit(formula, true)
+  // });
 
-  // Retrieve and assign the initiative formula setting.
-  const initFormula = game.settings.get("silentlegions", "initFormula");
-  _simpleUpdateInit(initFormula);
+  // // Retrieve and assign the initiative formula setting.
+  // const initFormula = game.settings.get("silentlegions", "initFormula");
+  // _simpleUpdateInit(initFormula);
 
-  /**
-   * Update the initiative formula.
-   * @param {string} formula - Dice formula to evaluate.
-   * @param {boolean} notify - Whether or not to post nofications.
-   */
-  function _simpleUpdateInit(formula, notify = false) {
-    const isValid = Roll.validate(formula);
-    if ( !isValid ) {
-      if ( notify ) ui.notifications.error(`${game.i18n.localize("SIMPLE.NotifyInitFormulaInvalid")}: ${formula}`);
-      return;
-    }
-    CONFIG.Combat.initiative.formula = formula;
-  }
+  // /**
+  //  * Update the initiative formula.
+  //  * @param {string} formula - Dice formula to evaluate.
+  //  * @param {boolean} notify - Whether or not to post nofications.
+  //  */
+  // function _simpleUpdateInit(formula, notify = false) {
+  //   const isValid = Roll.validate(formula);
+  //   if ( !isValid ) {
+  //     if ( notify ) ui.notifications.error(`${game.i18n.localize("SIMPLE.NotifyInitFormulaInvalid")}: ${formula}`);
+  //     return;
+  //   }
+  //   CONFIG.Combat.initiative.formula = formula;
+  // }
 
   /**
    * Slugify a string.

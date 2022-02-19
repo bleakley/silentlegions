@@ -13,7 +13,9 @@
       "min": 0,
       "max": 2
     },
-    "attributes": {},
+    "attributes": {
+      "initiative": 0
+    },
     "groups": {}
   }
 },
